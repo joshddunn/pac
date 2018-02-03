@@ -40,10 +40,10 @@ Dir.glob("./game/functions/**/*.p8").each do |file|
 end
 
 # update function
-game_file.write(File.open("./game/_update.p8").read)
+game_file.write(File.open("./game/update.p8").read)
 
 # draw function
-game_file.write(File.open("./game/_draw.p8").read)
+game_file.write(File.open("./game/draw.p8").read)
 
 # data from pico-8
 game_file.write(pico8_data)
