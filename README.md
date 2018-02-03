@@ -14,7 +14,11 @@ To compile your project into the `game.p8` file, run
 
     ruby pac.rb
 
-Using a file listener would probably be helpful.
+If you have `fswatch` installed, use the command
+
+    fswatch -o game/ | xargs -n1 ruby pac.rb
+
+to automatially watch for saved changes in the `game/` folder and then compile your game.
 
 ## File Structure
 
