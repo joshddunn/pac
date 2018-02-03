@@ -1,6 +1,4 @@
-# __gfx__
-
-# File.extname
+# build game.p8
 
 modules = []
 modules_include = []
