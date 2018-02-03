@@ -37,7 +37,9 @@ game_file.write(file_header)
 game_file.write(modules_include.join)
 
 # included files
-game_file.write(File.open("./game/globals.p8").read)
+globals_file = File.open("./game/globals.p8")
+game_file.write(globals_file.read)
+globals_file.close
 
 # function files
 Dir.glob("./game/functions/**/*.p8").each do |file|
@@ -47,10 +49,16 @@ Dir.glob("./game/functions/**/*.p8").each do |file|
 end
 
 # update function
-game_file.write(File.open("./game/update.p8").read)
+update_file = File.open("./game/update.p8")
+game_file.write(update_file.read)
+update_file.close
 
 # draw function
-game_file.write(File.open("./game/draw.p8").read)
+draw_file = File.open("./game/draw.p8")
+game_file.write(draw_file.read)
+draw_file.close
 
 # data from pico-8
 game_file.write(pico8_data)
+
+game_file.close
