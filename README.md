@@ -1,6 +1,6 @@
 # PAC 
 
-PAC is a convenient project structure for pico-8.
+PAC is a convenient project structure for making games in pico-8.
 
 ## Guide
 
