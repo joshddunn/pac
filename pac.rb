@@ -1,5 +1,11 @@
 # build game.p8
 
+file_header = %q(pico-8 cartridge // http://www.pico-8.com
+version 16
+__lua__
+pac = {}
+)
+
 modules = []
 modules_include = []
 
@@ -24,8 +30,11 @@ end
 
 game_file = File.open("game.p8", "w")
 
+# file header
+game_file.write(file_header)
+
 # pac library
-game_file.write("pico-8 cartridge // http://www.pico-8.com\nversion 16\n__lua__\npac = {}\n" + modules_include.join)
+game_file.write(modules_include.join)
 
 # included files
 game_file.write(File.open("./game/globals.p8").read)
