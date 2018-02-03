@@ -29,7 +29,7 @@ The files are compiled in the order:
 
 ## Library
 
-### mod(a, b)
+### pac.mod(a, b)
 
 Activated by including `mod` in your `PACFILE`.
 
