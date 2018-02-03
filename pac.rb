@@ -25,7 +25,7 @@ end
 game_file = File.open("game.p8", "w")
 
 # pac library
-game_file.write("pac = {}\n" + modules_include.join)
+game_file.write("pico-8 cartridge // http://www.pico-8.com\nversion 16\n__lua__\npac = {}\n" + modules_include.join)
 
 # included files
 game_file.write(File.open("./game/globals.p8").read)

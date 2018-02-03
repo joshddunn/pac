@@ -1,3 +1,3 @@
 -- draw function
-function draw()
+function _draw()
 end
