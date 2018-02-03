@@ -9,10 +9,23 @@ pac = {}
 modules = []
 modules_include = []
 
+pico8_tags = [
+  "__gfx__",
+  "__gff__",
+  "__map__",
+  "__sfx__",
+  "__music__"
+]
 pico8_data = ""
 print_line = false
+
 File.open("game.p8").each do |line|
-  print_line = true if line.include? "__gfx__"
+  if not print_line
+    pico8_tags.each do |tag|
+      print_line = true if line.include? tag
+    end
+  end
+
   pico8_data += line if print_line
 end
 
