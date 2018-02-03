@@ -39,7 +39,7 @@ Activated by including `mod` in your `PACFILE`.
 
 Calculates `a % b`.
 
-### pac.print(phrase, x, y, color)
+### pac.print(string, x, y, color)
 
 Activated by including `print` in your `PACFILE`.
 

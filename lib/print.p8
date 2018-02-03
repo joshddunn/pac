@@ -1,4 +1,4 @@
-function pac.print(phrase, x, y, color)
+function pac.print(string, x, y, color)
   if color == nil then
     color = 6
   end
@@ -6,9 +6,9 @@ function pac.print(phrase, x, y, color)
   if x == "left" then
     x = 0
   elseif x == "center" then
-    x = 64 - #phrase * 2
+    x = 64 - #string * 2
   elseif x == "right" then
-    x = 128 - #phrase * 4
+    x = 128 - #string * 4
   end
 
   if y == "top" then
@@ -19,5 +19,5 @@ function pac.print(phrase, x, y, color)
     y = 123
   end
 
-  print(phrase, x, y, color)
+  print(string, x, y, color)
 end
