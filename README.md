@@ -38,3 +38,13 @@ The files are compiled in the order:
 Activated by including `mod` in your `PACFILE`.
 
 Calculates `a % b`.
+
+### pac.print(phrase, x, y, color)
+
+Activated by including `print` in your `PACFILE`.
+
+At first glace, this looks very similar to the pico-8 print function.
+
+However, `x` accepts `left`, `center`, and `right` as arguments, and `y` accepts `top`, `middle`, and `bottom` as arguments.
+
+If color is `nil`, it defaults to `6` (light grey).
