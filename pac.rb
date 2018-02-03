@@ -49,17 +49,17 @@ game_file.write(file_header)
 # pac library
 game_file.write(modules_include.join)
 
-# included files
-globals_file = File.open("./game/globals.p8")
-game_file.write(globals_file.read)
-globals_file.close
-
 # function files
 Dir.glob("./game/functions/**/*.p8").each do |file|
   the_file = File.open(file)
   game_file.write(the_file.read)
   the_file.close
 end
+
+# included files
+globals_file = File.open("./game/globals.p8")
+game_file.write(globals_file.read)
+globals_file.close
 
 # update function
 update_file = File.open("./game/update.p8")

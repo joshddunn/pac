@@ -25,8 +25,8 @@ to automatially watch for saved changes in the `game/` folder and then compile y
 The files are compiled in the order:
 
   - Included PAC library functions
-  - Globals (found in `game/globals.p8`)
   - User defined functions (found in `game/functions/`)
+  - Globals (found in `game/globals.p8`)
   - Update loop (found in `game/update.p8`)
   - Draw loop (found in `game/draw.p8`)
   - PICO-8 generated data (found in `game/draw.p8`)
