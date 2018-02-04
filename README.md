@@ -48,3 +48,9 @@ At first glace, this looks very similar to the pico-8 print function.
 However, `x` accepts `left`, `center`, and `right` as arguments, and `y` accepts `top`, `middle`, and `bottom` as arguments.
 
 If color is `nil`, it defaults to `6` (light grey).
+
+### pac.length(e)
+
+Activated by including `length` in your `PACFILE`.
+
+Returns the length of an object or string.
