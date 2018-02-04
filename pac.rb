@@ -46,6 +46,11 @@ game_file = File.open("game.p8", "w")
 # file header
 game_file.write(file_header)
 
+# config
+config_file = File.open("./game/config.p8")
+game_file.write(config_file.read)
+config_file.close
+
 # pac library
 game_file.write(modules_include.join)
 
@@ -56,20 +61,15 @@ Dir.glob("./game/functions/**/*.p8").each do |file|
   the_file.close
 end
 
+# sounds
+sounds_file = File.open("./game/sounds.p8")
+game_file.write(sounds_file.read)
+sounds_file.close
+
 # included files
 globals_file = File.open("./game/globals.p8")
 game_file.write(globals_file.read)
 globals_file.close
-
-# update function
-update_file = File.open("./game/update.p8")
-game_file.write(update_file.read)
-update_file.close
-
-# draw function
-draw_file = File.open("./game/draw.p8")
-game_file.write(draw_file.read)
-draw_file.close
 
 # data from pico-8
 game_file.write(pico8_data)

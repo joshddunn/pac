@@ -1,2 +1,2 @@
-function update_game()
+function update.game()
 end

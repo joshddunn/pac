@@ -24,12 +24,16 @@ to automatially watch for saved changes in the `game/` folder and then compile y
 
 The files are compiled in the order:
 
+  - Config (found in `game/config.p8`)
   - Included PAC library functions
   - User defined functions (found in `game/functions/`)
+  - Sounds (found in `game/sounds.p8`)
   - Globals (found in `game/globals.p8`)
-  - Update loop (found in `game/update.p8`)
-  - Draw loop (found in `game/draw.p8`)
-  - PICO-8 generated data (found in `game/draw.p8`)
+  - PICO-8 generated data
+
+## Modes
+
+The draw and update functions are organized into modes, which are controlled by the global `mode` variable. If you have the mode `game` make sure that the functions `draw.game()` and `update.game()` exist. These functions can be placed in the `game/functions/draw/` and `game/functions/update/` folders, respectively.
 
 ## Library
 

@@ -1,2 +1,4 @@
-function draw_game()
+function draw.game()
+  cls()
+  print("hello world!")
 end
