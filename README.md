@@ -27,6 +27,7 @@ The files are compiled in the order:
   - Config (found in `game/config.p8`)
   - Included PAC library functions
   - User defined functions (found in `game/functions/`)
+  - Sprites (found in `game/sprites.p8`)
   - Sounds (found in `game/sounds.p8`)
   - Globals (found in `game/globals.p8`)
   - PICO-8 generated data

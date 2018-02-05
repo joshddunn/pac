@@ -63,6 +63,11 @@ if ARGV[0] == "compile"
   end
 
   # sounds
+  sprites_file = File.open("./game/sprites.p8")
+  game_file.write(sprites_file.read)
+  sprites_file.close
+
+  # sounds
   sounds_file = File.open("./game/sounds.p8")
   game_file.write(sounds_file.read)
   sounds_file.close
