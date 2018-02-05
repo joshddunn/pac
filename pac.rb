@@ -1,14 +1,15 @@
 # build game.p8
 
 if ARGV[0] == "compile"
-  file_header = %q(pico-8 cartridge // http://www.pico-8.com
-  version 16
-  __lua__
-  pac = {}
-  )
+  file_header = "pico-8 cartridge // http://www.pico-8.com\nversion 16\n__lua__\n"
 
-  modules = []
-  modules_include = []
+  files = [
+    "./game/config.p8",
+    "./game/functions/**/*.p8",
+    "./game/sprites.p8",
+    "./game/sounds.p8",
+    "./game/globals.p8"
+  ]
 
   pico8_tags = [
     "__gfx__",
@@ -17,80 +18,60 @@ if ARGV[0] == "compile"
     "__sfx__",
     "__music__"
   ]
+
   pico8_data = ""
   print_line = false
 
+  # find where pico8 game data starts and save it
   File.open("game.p8").each do |line|
-    if not print_line
+    if print_line
+      pico8_data += line
+    else
       pico8_tags.each do |tag|
         print_line = true if line.include? tag
       end
     end
-
-    pico8_data += line if print_line
   end
 
+  # grab modules from the PACFILE
   File.open("PACFILE").each do |line|
-    modules.push(line.strip)
+    files.insert 1, "./lib/#{line.strip}.p8"
   end
 
-  Dir.glob("./lib/*.p8").each do |file|
-    if modules.include? File.basename(file, ".p8") 
-      the_file = File.open(file)
-      modules_include.push the_file.read
-      the_file.close
-    end
-  end
-
+  # open our game file
   game_file = File.open("game.p8", "w")
 
-  # file header
+  # write file header
   game_file.write(file_header)
 
-  # config
-  config_file = File.open("./game/config.p8")
-  game_file.write(config_file.read)
-  config_file.close
-
-  # pac library
-  game_file.write(modules_include.join)
-
-  # function files
-  Dir.glob("./game/functions/**/*.p8").each do |file|
-    the_file = File.open(file)
-    game_file.write(the_file.read)
-    the_file.close
+  puts files
+  # write our project structure 
+  Dir.glob(files).each do |file|
+    game_file.write File.open(file).read
   end
 
-  # sounds
-  sprites_file = File.open("./game/sprites.p8")
-  game_file.write(sprites_file.read)
-  sprites_file.close
-
-  # sounds
-  sounds_file = File.open("./game/sounds.p8")
-  game_file.write(sounds_file.read)
-  sounds_file.close
-
-  # included files
-  globals_file = File.open("./game/globals.p8")
-  game_file.write(globals_file.read)
-  globals_file.close
-
-  # data from pico-8
+  # write from pico-8
   game_file.write(pico8_data)
 
+  # close file
   game_file.close
 elsif ARGV[0] == "generate"
   if ARGV[1] == "mode"
     mode_name = ARGV[2].downcase
-    draw_file = File.open("./game/functions/draw/draw_#{mode_name}.p8", "w")    
-    draw_file.write "function draw.#{mode_name}()\nend"
-    draw_file.close
 
-    update_file = File.open("./game/functions/update/update_#{mode_name}.p8", "w")    
-    update_file.write "function update.#{mode_name}()\nend"
-    update_file.close
+    types = [
+      "draw",
+      "update"
+    ]
+
+    types.each do |type|
+      path = "./game/functions/#{type}/#{type}_#{mode_name}.p8"
+      if File.exists? path
+        puts "#{type}_#{mode_name}.p8 already exists." 
+      else
+        File.open(path, "w").write "function #{type}.#{mode_name}()\nend"
+      end
+    end
 
     puts "#{mode_name} mode created."
   else
@@ -99,10 +80,16 @@ elsif ARGV[0] == "generate"
 elsif ARGV[0] == "destroy"
   if ARGV[1] == "mode"
     mode_name = ARGV[2].downcase
-    draw_path = "./game/functions/draw/draw_#{mode_name}.p8"
-    File.delete(draw_path) if File.exists? draw_path
-    update_path = "./game/functions/update/update_#{mode_name}.p8"
-    File.delete(update_path) if File.exists? update_path
+
+    types = [
+      "draw",
+      "update"
+    ]
+
+    types.each do |type|
+      path = "./game/functions/#{type}/#{type}_#{mode_name}.p8"
+      File.delete(path) if File.exists? path
+    end
 
     puts "#{mode_name} mode destroyed."
   else

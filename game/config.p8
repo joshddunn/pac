@@ -1,6 +1,9 @@
 -- default mode
 mode = "game"
 
+-- pac library object
+pac = {}
+
 -- update and draw functions
 
 update = {}
