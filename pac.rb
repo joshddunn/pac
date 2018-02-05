@@ -2,24 +2,15 @@
 
 require "./lib/class/pac.rb"
 
-error = "That is not a valid PAC command."
-
-if ARGV[0] == "compile"
+case ARGV[0..1].join("_")
+when "compile"
   PAC.new.compile
-elsif ARGV[0] == "generate"
-  if ARGV[1] == "mode"
-    PAC.new.generate_mode(ARGV[2].downcase)
-    puts "#{ARGV[2]} mode created."
-  else
-    puts error
-  end
-elsif ARGV[0] == "destroy"
-  if ARGV[1] == "mode"
-    PAC.new.destroy_mode(ARGV[2].downcase)
-    puts "#{ARGV[2]} mode destroyed."
-  else
-    puts error 
-  end
+when "generate_mode"
+  PAC.new.generate_mode(ARGV[2].downcase)
+  puts "#{ARGV[2]} mode created."
+when "destroy_mode"
+  PAC.new.destroy_mode(ARGV[2].downcase)
+  puts "#{ARGV[2]} mode destroyed."
 else
-    puts error 
+  puts "That is not a valid PAC command."
 end
